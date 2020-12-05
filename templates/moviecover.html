@@ -1,0 +1,62 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Movie recommendations - Home</title>
+
+     <link href="{%static 'css/cover.css'%}" type="text/css" rel="stylesheet">
+<meta name="theme-color" content="#563d7c">
+     <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+ 
+    <link href="{%static 'css/moviecover.css'%}" type="text/css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <!--<h3 class="masthead-brand">Home Page</h3> -->
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link active" href="bookcover.html" target="_blank">Books</a>
+        
+      </nav>
+    </div>
+  </header>
+
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">Search for any movie!</h1>
+    <p class="lead">Don't know what to watch? Tell us a movie you like and we'll see if we can tell you something to watch!</p>
+    <p class="lead">
+      <form action="{%url 'movierec'%}">
+        <label for="inputMovie" class="sr-only">movie</label>
+        <input type="text" name="inputMovie" id="inputMovie" class="form-control" placeholder="Enter movie name" required autofocus>
+      <input type="submit" class="btn btn-lg btn-secondary" value="Give me some movies!">
+      </form>
+    </p>
+  </main>
+
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      
+    </div>
+  </footer>
+</div>
+</body>
+</html>
