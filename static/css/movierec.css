@@ -1,0 +1,31 @@
+.jumbotron{
+    background-image: url("../images/movies10.jpg");
+    
+}
+
+.display-4{
+    color:black
+}
+
+body{
+    background-color: #eefcfc;
+}
+
+.col 
+{
+    background-color: white;
+}
+
+#title{
+    background-color: transparent;
+}
+
+.btn{
+    background-color: #186e9b;
+    color:white;
+    border-color: white;;
+}
+
+img{
+    background-image: url("../images/movies5.jpg");
+}
