@@ -22,6 +22,7 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.bookcover ),
     path('bookrec.html',views.bookrec , name  = 'bookrec' ),
     path('bookcover.html',views.bookcover , name  = 'bookcover' ),
     path('moviecover.html',views.moviecover , name  = 'moviecover' ),
