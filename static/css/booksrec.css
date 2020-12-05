@@ -1,0 +1,25 @@
+.jumbotron{
+    background-image: url("../images/books9.jpg");
+}
+
+body{
+    background-color: #fff9f7;
+}
+
+.col 
+{
+    background-color: white;
+}
+
+#title{
+    background-color: transparent;
+}
+
+.btn{
+    background-color: navajowhite;
+    color:black;
+    border-color: black;;
+}
+img{
+    background-image: url("../images/books13.jpg");
+}
