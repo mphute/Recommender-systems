@@ -1,3 +1,3 @@
 
-web: gunicorn Recommender-systems.wsgi
+web: gunicorn mysite.wsgi --log-file -
 
