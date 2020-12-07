@@ -20,11 +20,14 @@ pd.DataFrame.mask = mask
 pd.DataFrame.flatten_cols = flatten_cols
 
 movies = pd.read_csv("movies.csv" )
+movies['title_orig']=movies['title']
+movies['title'] = [x.lower() for x in movies['title']]
 ratings = pd.read_csv("ratings.csv" )
 
 correlation = pd.read_csv("corr_set.csv" )
 df_books =  pd.read_csv("books.csv" )
-
+df_books['title_orig'] = df_books['title']
+df_books['title'] = [x.lower() for x in df_books['title']]
 
 
 
@@ -89,14 +92,11 @@ class CFModel(object):
 
 def movie_neighbors(model, title_substring, measure=DOT, k=10):
   # Search for movie ids that match the given substring.
-  ids =  movies[movies['title'].str.contains(title_substring)].index.values
+  ids =  movies[movies['title'].str.contains(title_substring.lower())].index.values
   titles = movies.iloc[ids]['title'].values
   if len(titles) == 0:
     raise ValueError("Found no movies with title %s" % title_substring)
-  print("Nearest neighbors of : %s." % titles[0])
-  if len(titles) > 1:
-    print("[Found more than one matching movie. Other candidates: {}]".format(
-        ", ".join(titles[1:])))
+  
   movie_id = ids[0]
   scores = compute_scores(
       model.embeddings["movie_id"][movie_id], model.embeddings["movie_id"],
@@ -104,7 +104,7 @@ def movie_neighbors(model, title_substring, measure=DOT, k=10):
   score_key = measure + ' score'
   df = pd.DataFrame({
       'score_key': list(scores),
-      'titles': list(movies['title']),
+      'titles': list(movies['title_orig']),
       'genres': list(movies['all_genres']),
       'images': list(movies['image_url'])
   })
@@ -114,18 +114,16 @@ def movie_neighbors(model, title_substring, measure=DOT, k=10):
 def get_top_10(title_substring):
     #title_substring = "Pride and Prejudice"
 
-    ids =  df_books[df_books['title'].str.contains(title_substring)].index.values
+    ids =  df_books[df_books['title'].str.contains(title_substring.lower())].index.values
     titles = df_books.iloc[ids]['title'].values
     if len(titles) == 0:
         raise ValueError("Found no movies with title %s" % title_substring)
-    print("Nearest neighbors of : %s." % titles[0])
-    if len(titles) > 1:
-        print("[Found more than one matching movie. Other candidates:\n {}]".format(", \n".join(titles[1:])))
+    
     bk_id = ids[0]
     #score_key = measure + ' score'
     df = pd.DataFrame({
       'score': correlation.iloc[bk_id],
-      'titles': list(df_books['title']),
+      'titles': list(df_books['title_orig']),
       'author': list(df_books['author']),
       'year': list(df_books['year']),
       'images' : list(df_books['image_url'])
@@ -180,3 +178,4 @@ def movierec(request):
 def moviecover(request):
         context = {'foo': 'bar'}
         return render(request,'moviecover.html',context = context)
+
